@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BI Padrão – Agnes Samira</title>
+  <meta name="description" content="Painel de indicadores para clientes da Auvo, com dados do BigQuery e modo TV." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css?v=4" />
+  <link rel="stylesheet" href="../css/demos.css?v=4" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="../index.html" class="logo">&lt;<b>AS</b>/&gt;</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">Projetos</a></li>
+      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../index.html#experience">Experiência</a></li>
+      <li><a href="../index.html#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="case-head wrap">
+    <a class="crumb" href="../index.html#projects">← Voltar aos projetos</a>
+    <h1>BI Padrão</h1>
+    <p class="case-lead">
+      Painel de indicadores que a Auvo libera para os clientes dentro do portal.
+      Mostra tarefas, equipe, chamados, orçamentos, financeiro, clientes,
+      equipamentos e projetos, com um modo TV para ficar rodando numa tela do escritório.
+    </p>
+    <dl class="case-meta">
+      <dt>Meu papel</dt><dd>Abas, modo TV, ativação e estudo de custo</dd>
+      <dt>Equipe</dt><dd>Time de Low Code da Auvo</dd>
+      <dt>Stack</dt><dd>React, Node, Prisma, BigQuery</dd>
+    </dl>
+  </header>
+
+  <section class="wrap" aria-label="Demonstração">
+    <div class="demo">
+      <div class="demo-cap">
+        <span>Experimente: troque de aba, mude o período, passe o mouse nas barras ou ligue o modo TV.</span>
+        <span>Dados fictícios</span>
+      </div>
+
+      <div class="bi" id="bi">
+        <div class="bi-top">
+          <strong class="bi-name">Empresa Exemplo Ltda.</strong>
+          <label class="bi-period">Período
+            <select id="bi-period">
+              <option value="30">Últimos 30 dias</option>
+              <option value="90" selected>Últimos 90 dias</option>
+              <option value="180">Últimos 180 dias</option>
+            </select>
+          </label>
+          <button type="button" class="btn btn-quiet" id="bi-table-btn" aria-pressed="false">Ver tabela</button>
+          <button type="button" class="btn" id="bi-tv-btn" aria-pressed="false">Ligar modo TV</button>
+        </div>
+        <div class="bi-tabs" role="tablist" aria-label="Abas do BI" id="bi-tabs"></div>
+        <div class="bi-progress" aria-hidden="true"><span id="bi-progress"></span></div>
+        <div class="bi-panel" role="tabpanel" id="bi-panel" tabindex="0">
+          <div class="kpis" id="bi-kpis"></div>
+          <div class="bi-chart-head">
+            <h3 id="bi-chart-title"></h3>
+            <span id="bi-chart-note"></span>
+          </div>
+          <div class="chart" id="bi-chart"></div>
+          <table class="bi-table" id="bi-table" hidden></table>
+        </div>
+        <div class="tip" id="bi-tip" role="status" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="case-body wrap">
+    <section class="case-block">
+      <h2>O problema</h2>
+      <div>
+        <p>Os clientes da Auvo geram muitos dados no dia a dia (tarefas, chamados,
+          orçamentos, equipamentos), mas cada um precisava montar os próprios relatórios
+          para enxergar a operação. A ideia do BI Padrão é entregar um painel pronto,
+          igual para todos, que o time ativa para cada cliente sem programar nada novo.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>O que construí</h2>
+      <div>
+        <ul>
+          <li>Abas de Orçamentos, Financeiro, Clientes, Equipamentos e Projetos, com
+            indicadores como taxa de conversão, curva ABC de receita, MTBF e MTTR de
+            equipamentos e horas por projeto.</li>
+          <li>Modo TV com tela cheia de verdade: escolha das abas que entram no rodízio,
+            intervalo de 10 s a 1 hora e rolagem automática. O link público pode liberar
+            ou bloquear a tela cheia.</li>
+          <li>Perfis de filtro salvos, colunas configuráveis e exportação em PDF (escolhendo
+            as abas) e CSV.</li>
+          <li>Tela de ativação para o time interno: liga o BI para um cliente, escolhe as
+            abas visíveis e importou o histórico de ativações que antes ficava no Coda.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Estudo de custo no BigQuery</h2>
+      <div>
+        <p>Antes de liberar o BI para muitos clientes, montei um simulador em Node, sem
+          dependências, para o time de dados entender quanto cada abertura de painel
+          consulta. Ele reproduz as 15 consultas do BI, quais telas chamam cada uma e
+          como o cache se comporta.</p>
+        <ul>
+          <li>Mostrou que o cache em memória e em disco era apagado a cada deploy, e que os
+            filtros de tela não entravam na chave de cache.</li>
+          <li>Apontou consultas sem limite de bytes faturados, sem rótulos de job e com
+            período padrão sem teto.</li>
+          <li>Gera o SQL já preenchido para colar no console do BigQuery e ver a estimativa
+            de tamanho de graça, antes de rodar.</li>
+        </ul>
+        <p>Levei a lição para outros relatórios: em BIs de clientes passei a fazer uma
+          leitura do BigQuery por período e a usar um cliente com teto de bytes.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Stack</h2>
+      <div>
+        <p>React 18, TanStack Query, Tailwind, Node com Express, Prisma e PostgreSQL,
+          Google BigQuery, API REST da Auvo como fonte alternativa, deploy no Railway.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <a class="next" href="portal-financeiro.html"><span>Próximo projeto</span><strong>Portal Financeiro</strong></a>
+  </div>
+
+  <footer>
+    <div class="wrap">© 2026 Agnes Samira • Feito com 💜 e código</div>
+  </footer>
+
+  <script src="../js/bi.js"></script>
+</body>
+</html>

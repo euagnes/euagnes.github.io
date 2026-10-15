@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etiquetas com QR Code – Agnes Samira</title>
+  <meta name="description" content="Etiquetas de equipamento com QR Code prontas para imprimir." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css?v=4" />
+  <link rel="stylesheet" href="../css/demos.css?v=4" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="../index.html" class="logo">&lt;<b>AS</b>/&gt;</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">Projetos</a></li>
+      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../index.html#experience">Experiência</a></li>
+      <li><a href="../index.html#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="case-head wrap">
+    <a class="crumb" href="../index.html#projects">← Voltar aos projetos</a>
+    <h1>Etiquetas com QR Code</h1>
+    <p class="case-lead">
+      Geradores de etiquetas para colar nos equipamentos dos clientes. Quem escaneia o QR
+      Code abre direto uma solicitação de atendimento para aquele equipamento, sem precisar
+      saber o número dele.
+    </p>
+    <dl class="case-meta">
+      <dt>Meu papel</dt><dd>Descoberta, desenvolvimento e testes</dd>
+      <dt>Para quem</dt><dd>Empresas de engenharia e segurança eletrônica</dd>
+      <dt>Stack</dt><dd>React, TypeScript, API Auvo, Vitest</dd>
+    </dl>
+  </header>
+
+  <section class="wrap" aria-label="Demonstração">
+    <div class="demo">
+      <div class="demo-cap">
+        <span>Experimente: mude o formato, escolha os equipamentos e esconda linhas. O QR Code é real e pode ser lido pelo celular.</span>
+        <span>Dados fictícios</span>
+      </div>
+
+      <div class="qr">
+        <form class="qr-form" id="qr-form" onsubmit="return false">
+          <fieldset>
+            <legend>Formato</legend>
+            <label><input type="radio" name="fmt" value="quadrada" checked /> 5 × 5 cm com logo</label>
+            <label><input type="radio" name="fmt" value="vertical" /> Vertical com contatos</label>
+          </fieldset>
+          <fieldset id="qr-size-set" hidden>
+            <legend>Tamanho</legend>
+            <label><input type="radio" name="size" value="G" checked /> G, 6 por folha</label>
+            <label><input type="radio" name="size" value="M" /> M, 12 por folha</label>
+          </fieldset>
+          <fieldset id="qr-lines-set" hidden>
+            <legend>Linhas visíveis</legend>
+            <label><input type="checkbox" name="line" value="tel" checked /> Telefone</label>
+            <label><input type="checkbox" name="line" value="horario" checked /> Horário e plantão</label>
+          </fieldset>
+          <fieldset>
+            <legend>Equipamentos</legend>
+            <div id="qr-equips"></div>
+          </fieldset>
+          <button type="button" class="btn" id="qr-print">Imprimir etiquetas</button>
+        </form>
+
+        <div class="qr-sheet-wrap">
+          <div class="qr-sheet" id="qr-sheet"></div>
+          <p class="qr-page" id="qr-page"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="case-body wrap">
+    <section class="case-block">
+      <h2>O problema</h2>
+      <div>
+        <p>A Auvo já oferecia quatro formatos de etiqueta, mas um cliente com centenas de
+          equipamentos precisava de uma etiqueta quadrada de 5 × 5 cm com a própria marca.
+          Outro queria um modelo vertical com telefone, e-mail e horário de plantão, para o
+          cliente final saber a quem recorrer.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>O que construí</h2>
+      <div>
+        <ul>
+          <li>Documento de descoberta com o cliente antes de codar: tamanho, ordem das
+            informações e para onde o QR Code deve levar.</li>
+          <li>Etiqueta quadrada de 50 × 50 mm com logo, QR Code, nome e identificador do
+            equipamento, distribuída numa folha A4 com numeração de páginas. Depois ganhou
+            layout horizontal e seletor de tamanho.</li>
+          <li>Etiqueta vertical com logo, contatos, QR Code, nome do cliente e horário de
+            atendimento, em dois tamanhos (6 ou 12 por folha), logo enviado pelo usuário e
+            opção de esconder qualquer linha.</li>
+          <li>Painel com busca por nome, identificador, categoria e status, seleção múltipla
+            e "selecionar todos os filtrados".</li>
+        </ul>
+        <p>O QR Code leva a uma página de abertura de chamado já preenchida com o
+          equipamento, então o cliente final só descreve o problema.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Stack</h2>
+      <div>
+        <p>React, Vite, TypeScript, API REST da Auvo por um proxy que só permite leitura,
+          testes escritos antes do código com Vitest.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <a class="next" href="bi-padrao.html"><span>Próximo projeto</span><strong>BI Padrão</strong></a>
+  </div>
+
+  <footer>
+    <div class="wrap">© 2026 Agnes Samira • Feito com 💜 e código</div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js" integrity="sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1" crossorigin="anonymous"></script>
+  <script src="../js/qr.js"></script>
+</body>
+</html>

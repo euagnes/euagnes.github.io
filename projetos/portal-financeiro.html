@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Financeiro – Agnes Samira</title>
+  <meta name="description" content="Sistema interno do financeiro da Auvo para o programa de indicação." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css?v=4" />
+  <link rel="stylesheet" href="../css/demos.css?v=4" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="../index.html" class="logo">&lt;<b>AS</b>/&gt;</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">Projetos</a></li>
+      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../index.html#experience">Experiência</a></li>
+      <li><a href="../index.html#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="case-head wrap">
+    <a class="crumb" href="../index.html#projects">← Voltar aos projetos</a>
+    <h1>Portal Financeiro</h1>
+    <p class="case-lead">
+      Sistema interno do financeiro da Auvo para o programa de indicação. Ele junta
+      dados do HubSpot, do Coda e da Superlógica, confere quem tem direito a bônus e
+      foi feito para substituir uma coleção de planilhas e cenários de automação.
+    </p>
+    <dl class="case-meta">
+      <dt>Meu papel</dt><dd>Projeto inteiro, do banco ao front</dd>
+      <dt>Para quem</dt><dd>Time financeiro da Auvo</dd>
+      <dt>Stack</dt><dd>React, Node, Prisma, PostgreSQL</dd>
+    </dl>
+  </header>
+
+  <section class="wrap" aria-label="Demonstração">
+    <div class="demo">
+      <div class="demo-cap">
+        <span>Experimente: rode a sincronização e veja cada indicação avançar. Os bônus são só simulados.</span>
+        <span>Dados fictícios</span>
+      </div>
+
+      <div class="pf">
+        <div class="pf-top">
+          <strong>Indique e Ganhe</strong>
+          <span class="pf-mode" title="O modo ativo não existe de propósito: nada é disparado de verdade.">Modo sombra</span>
+          <button type="button" class="btn btn-quiet" id="pf-reset">Recomeçar</button>
+          <button type="button" class="btn" id="pf-sync">Rodar sincronização</button>
+        </div>
+        <div class="pf-grid">
+          <table class="pf-table">
+            <thead>
+              <tr><th>Empresa indicada</th><th>Embaixador</th><th>Etapa</th><th>Bônus</th></tr>
+            </thead>
+            <tbody id="pf-rows"></tbody>
+          </table>
+          <div class="pf-log">
+            <h3>Registro da sincronização</h3>
+            <ol id="pf-log" aria-live="polite"><li class="pf-empty">Nada rodou ainda.</li></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="case-body wrap">
+    <section class="case-block">
+      <h2>O problema</h2>
+      <div>
+        <p>O programa de indicação pagava bônus a quem indicava novos clientes, mas o
+          controle estava espalhado entre tabelas no Coda, cenários no Make e fluxos no n8n.
+          Havia linhas duplicadas, pagamentos marcados sem data ou valor e uma fórmula que
+          contava bônus resgatados a mais, porque olhava a etapa do negócio em vez do
+          pagamento.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>O que construí</h2>
+      <div>
+        <ul>
+          <li>Importação do Coda que pode rodar quantas vezes for preciso sem duplicar nada:
+            atualiza pela linha de origem, guarda só o que mudou e nunca descarta um registro.
+            Campo inválido vira pendência de revisão.</li>
+          <li>Leitura do HubSpot somente com permissão de leitura, limite de 4 requisições por
+            segundo e espera automática quando a API devolve 429, já que o Make usa a mesma conta.</li>
+          <li>Conferência do primeiro pagamento na Superlógica, com conciliação por CNPJ quando
+            o pagador cadastrado não bate com a empresa indicada.</li>
+          <li>Recriei os fluxos de bônus do Make em modo sombra: o sistema calcula cada ação e
+            registra, mas não envia nada. Depois comparo com o que o Make de fato fez.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Segurança</h2>
+      <div>
+        <p>Login com Google só para contas da Auvo, permissões por aba conferidas no
+          servidor, chave PIX criptografada e mascarada, com registro de cada visualização,
+          e trilha de auditoria gravada na mesma transação da alteração. O sistema não
+          escreve em nenhuma das ferramentas de origem.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Stack</h2>
+      <div>
+        <p>Monorepo com pnpm, React 18, Vite, Tailwind, Node com Express, Prisma,
+          PostgreSQL 16, Zod e Vitest. APIs do HubSpot, Coda e Superlógica. Deploy no Railway.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <a class="next" href="gerador-os.html"><span>Próximo projeto</span><strong>Gerador de OS</strong></a>
+  </div>
+
+  <footer>
+    <div class="wrap">© 2026 Agnes Samira • Feito com 💜 e código</div>
+  </footer>
+
+  <script src="../js/portal.js"></script>
+</body>
+</html>

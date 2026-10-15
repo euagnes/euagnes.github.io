@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de OS – Agnes Samira</title>
+  <meta name="description" content="Ordens de serviço em PDF montadas a partir das tarefas do Auvo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css?v=4" />
+  <link rel="stylesheet" href="../css/demos.css?v=4" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="../index.html" class="logo">&lt;<b>AS</b>/&gt;</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">Projetos</a></li>
+      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../index.html#experience">Experiência</a></li>
+      <li><a href="../index.html#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="case-head wrap">
+    <a class="crumb" href="../index.html#projects">← Voltar aos projetos</a>
+    <h1>Gerador de OS</h1>
+    <p class="case-lead">
+      Painel que busca as tarefas de um cliente na API da Auvo e monta a ordem de serviço
+      em PDF com o cabeçalho da empresa. O questionário entra ou não conforme o grupo do
+      cliente final.
+    </p>
+    <dl class="case-meta">
+      <dt>Meu papel</dt><dd>Desenvolvimento e integração ao portal</dd>
+      <dt>Para quem</dt><dd>Empresa de manutenção de elevadores</dd>
+      <dt>Stack</dt><dd>React, API Auvo, react-pdf, n8n</dd>
+    </dl>
+  </header>
+
+  <section class="wrap" aria-label="Demonstração">
+    <div class="demo">
+      <div class="demo-cap">
+        <span>Experimente: filtre as tarefas, abra uma OS e baixe o PDF. Clientes do grupo "com questionário" recebem a seção extra.</span>
+        <span>Dados fictícios</span>
+      </div>
+
+      <div class="os">
+        <div class="os-side">
+          <div class="os-filters">
+            <label>Status
+              <select id="os-status">
+                <option value="">Todos</option>
+                <option>Finalizada</option>
+                <option>Em andamento</option>
+                <option>Agendada</option>
+              </select>
+            </label>
+            <label>Técnico
+              <select id="os-tec">
+                <option value="">Todos</option>
+              </select>
+            </label>
+            <label>Grupo
+              <select id="os-grupo">
+                <option value="">Todos</option>
+                <option>OS com questionário</option>
+                <option>OS sem questionário</option>
+              </select>
+            </label>
+          </div>
+          <ul class="os-list" id="os-list"></ul>
+        </div>
+        <div class="os-preview">
+          <div class="os-actions">
+            <span id="os-hint">Escolha uma tarefa para ver a OS.</span>
+            <button type="button" class="btn" id="os-pdf" disabled>Baixar PDF</button>
+          </div>
+          <article class="os-doc" id="os-doc" hidden></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="case-body wrap">
+    <section class="case-block">
+      <h2>O problema</h2>
+      <div>
+        <p>O cliente precisava entregar ordens de serviço no mesmo formato do relatório de
+          tarefas da Auvo, mas com o próprio cabeçalho (logo, CNPJ e endereço). Parte dos
+          clientes finais exige o questionário preenchido pelo técnico e parte não, e isso
+          era decidido à mão a cada envio.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>O que construí</h2>
+      <div>
+        <ul>
+          <li>Login com a chave e o token da API da Auvo do próprio cliente, numa sessão
+            temporária. O acesso à API é somente leitura.</li>
+          <li>Filtros por período, status, cliente, técnico, código da tarefa e grupo do
+            cliente, com a tabela mostrando o grupo de cada tarefa.</li>
+          <li>OS em PDF com cabeçalho, dados do cliente, técnico, check-in e check-out,
+            questionário em grade com fotos e equipamentos, e numeração de páginas.</li>
+          <li>Regra do questionário pelo grupo do cliente. Se o cliente não está em nenhum
+            grupo, a OS sai sem questionário e o caso fica registrado para revisão.</li>
+          <li>Envio por e-mail por um fluxo próprio no n8n, com destinatários extras
+            configuráveis e registro dos envios.</li>
+        </ul>
+        <p>Depois desse, trabalhei em outros geradores no mesmo formato: relatório de
+          chamados com exportação para Excel, PMOC com ficha por equipamento e histórico
+          de atendimentos por equipamento.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Stack</h2>
+      <div>
+        <p>React, TypeScript, API REST da Auvo v2, @react-pdf/renderer, n8n para o envio
+          de e-mails, integrado ao portal do time de Low Code.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <a class="next" href="etiquetas-qr.html"><span>Próximo projeto</span><strong>Etiquetas com QR Code</strong></a>
+  </div>
+
+  <footer>
+    <div class="wrap">© 2026 Agnes Samira • Feito com 💜 e código</div>
+  </footer>
+
+  <script src="../js/os.js"></script>
+</body>
+</html>
