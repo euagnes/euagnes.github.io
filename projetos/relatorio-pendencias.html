@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Relatório de Pendências – Agnes Samira</title>
+  <meta name="description" content="Relatório de pendências das tarefas enviado por e-mail aos gestores, com agendamento por cliente." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/site.css?v=4" />
+  <link rel="stylesheet" href="../css/demos.css?v=6" />
+</head>
+<body>
+  <nav class="nav">
+    <a href="../index.html" class="logo">&lt;<b>AS</b>/&gt;</a>
+    <ul class="nav-links">
+      <li><a href="../index.html#projects">Projetos</a></li>
+      <li><a href="../index.html#about">Sobre</a></li>
+      <li><a href="../index.html#experience">Experiência</a></li>
+      <li><a href="../index.html#contact">Contato</a></li>
+    </ul>
+  </nav>
+
+  <header class="case-head wrap">
+    <a class="crumb" href="../index.html#projects">← Voltar aos projetos</a>
+    <h1>Relatório de Pendências por E&#8209;mail</h1>
+    <p class="case-lead">
+      Resumo automático, por e-mail, das tarefas que os técnicos finalizaram com alguma
+      pendência. Cada cliente escolhe quem recebe e com que frequência: diário, semanal
+      ou mensal.
+    </p>
+    <dl class="case-meta">
+      <dt>Meu papel</dt><dd>Projeto inteiro, do motor ao painel</dd>
+      <dt>Para quem</dt><dd>Gestores dos clientes da Auvo</dd>
+      <dt>Stack</dt><dd>Node, React, Prisma, Resend</dd>
+    </dl>
+  </header>
+
+  <section class="wrap" aria-label="Demonstração">
+    <div class="demo">
+      <div class="demo-cap">
+        <span>Experimente: escolha a frequência, adicione destinatários, mude o horário e veja o e-mail que seria enviado.</span>
+        <span>Dados fictícios</span>
+      </div>
+
+      <div class="rp">
+        <div class="rp-config">
+          <div class="rp-freqs" role="tablist" aria-label="Frequência" id="rp-freqs"></div>
+
+          <div class="rp-card" id="rp-card">
+            <div class="rp-card-head">
+              <strong id="rp-card-title"></strong>
+              <label class="rp-switch">
+                <input type="checkbox" id="rp-ativo" />
+                <span id="rp-ativo-txt"></span>
+              </label>
+            </div>
+
+            <label class="rp-label" for="rp-hora">Horário de envio</label>
+            <select id="rp-hora"></select>
+
+            <span class="rp-label">Destinatários <small id="rp-count"></small></span>
+            <ul class="rp-emails" id="rp-emails"></ul>
+            <form class="rp-add" id="rp-add">
+              <input type="text" id="rp-novo" placeholder="nome@empresa.com.br" aria-label="Novo destinatário" autocomplete="off" />
+              <button type="submit" class="btn btn-quiet">Adicionar</button>
+            </form>
+            <p class="rp-erro" id="rp-erro" role="alert"></p>
+
+            <p class="rp-next" id="rp-next"></p>
+          </div>
+        </div>
+
+        <div class="rp-mail-wrap">
+          <div class="rp-mail-meta">
+            <span>Assunto</span>
+            <strong id="rp-assunto"></strong>
+            <span>Para</span>
+            <strong id="rp-para"></strong>
+          </div>
+          <article class="rp-mail" id="rp-mail"></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="case-body wrap">
+    <section class="case-block">
+      <h2>O problema</h2>
+      <div>
+        <p>O resumo de pendências já existia como um fluxo no n8n, mas era tudo ou nada:
+          para parar os e-mails de um cliente era preciso desligar o fluxo inteiro, as
+          frequências não tinham destinatários próprios e o texto digitado pelos técnicos
+          ia para o e-mail sem tratamento. Levei o relatório para dentro do portal do time,
+          com configuração por cliente.</p>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>O que construí</h2>
+      <div>
+        <ul>
+          <li>Motor que lê as tarefas finalizadas na API da Auvo e conta como pendência a
+            observação deixada pelo técnico ou a pergunta do questionário sem resposta. Cada
+            tarefa conta uma vez, agrupada por técnico.</li>
+          <li>E-mail em HTML e em texto puro, com totais, tabela por técnico e as pendências
+            de cada tarefa com link para o detalhe no Auvo. Tudo que o técnico digitou é
+            escapado, para ninguém conseguir montar um link falso num e-mail assinado pela Auvo.</li>
+          <li>App no portal do cliente: um cartão por frequência, cada um com seus
+            destinatários (até 20) e horário. Pausar mantém a configuração salva.</li>
+          <li>Painel interno para o time ativar o app por cliente, com busca, ordenação e a
+            data do último envio. Ativar não dispara nada: o cliente precisa configurar os
+            destinatários antes.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Decisões técnicas</h2>
+      <div>
+        <ul>
+          <li>Um job de hora em hora decide o que está na hora de sair. A data do último envio
+            só é gravada depois que o provedor confirma, então uma falha é repetida no ciclo
+            seguinte e o mesmo período nunca sai duas vezes.</li>
+          <li>Os períodos são sempre fechados (ontem, a semana de segunda a domingo, o mês
+            anterior) e calculados no fuso de São Paulo.</li>
+          <li>A leitura da API tem teto de páginas, porque a API cobra por registro. Se o
+            teto for atingido, o e-mail avisa que os números são parciais em vez de mostrar
+            um total menor sem explicação.</li>
+          <li>Cada cliente roda isolado: se a API falhar para um, os outros continuam.</li>
+          <li>Tirei um botão de "enviar agora" que eu mesma tinha criado, porque deixava uma
+            rota capaz de mandar e-mail para destinatários reais.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="case-block">
+      <h2>Stack</h2>
+      <div>
+        <p>TypeScript, Node com Express, Prisma e PostgreSQL, React 18 com TanStack Query e
+          Tailwind, API REST da Auvo, Resend para o envio, testes com Vitest e um script de
+          ponta a ponta que gera o HTML sem precisar de banco.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="wrap">
+    <a class="next" href="bi-padrao.html"><span>Próximo projeto</span><strong>BI Padrão</strong></a>
+  </div>
+
+  <footer>
+    <div class="wrap">© 2026 Agnes Samira • Feito com 💜 e código</div>
+  </footer>
+
+  <script src="../js/pendencias.js"></script>
+</body>
+</html>
