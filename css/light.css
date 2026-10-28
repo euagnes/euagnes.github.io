@@ -1,0 +1,76 @@
+/* Tema claro: ativado com data-theme="light" no <html> */
+
+/* Botão de troca de tema (nos dois temas) */
+.theme-toggle {
+  width: 38px; height: 38px; flex: none;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(168, 85, 247, .45);
+  background: transparent;
+  color: inherit;
+  font-size: 17px; line-height: 1;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.theme-toggle:hover { background: rgba(168, 85, 247, .14); transform: rotate(15deg); }
+.nav-right { display: flex; align-items: center; gap: 24px; }
+
+/* ---------- Página inicial (main.css) ---------- */
+:root[data-theme="light"] {
+  --bg: #faf8ff;
+  --bg-2: #f1edfb;
+  --card: #ffffff;
+  --line: rgba(40, 24, 80, .1);
+  --text: #1d1636;
+  --muted: #5f5878;
+  /* páginas de projeto (site.css) */
+  --panel: #f1edfb;
+  --surface: #ffffff;
+  --ink: #1d1636;
+  --rule: rgba(40, 24, 80, .12);
+  --grid: rgba(40, 24, 80, .07);
+  --accent-ink: #7e22ce;
+  --accent-soft: rgba(168, 85, 247, .12);
+  --ok: #15803d;
+  --warn: #b45309;
+}
+:root[data-theme="light"] body { background: var(--bg); color: var(--text); }
+:root[data-theme="light"] .nav.scrolled,
+:root[data-theme="light"] .nav { --nav-bg: rgba(250, 248, 255, .88); }
+:root[data-theme="light"] .nav.scrolled { background: var(--nav-bg); }
+:root[data-theme="light"] .p-index { color: rgba(40, 24, 80, .06); }
+:root[data-theme="light"] .p-tags span { background: rgba(168, 85, 247, .12); color: #7e22ce; }
+:root[data-theme="light"] .project:hover,
+:root[data-theme="light"] .site:hover { box-shadow: 0 18px 40px rgba(60, 30, 120, .14); }
+:root[data-theme="light"] .tag:hover { background: rgba(168, 85, 247, .1); }
+:root[data-theme="light"] .about-photo .inner { background: #ece6fb; }
+:root[data-theme="light"] .browser { background: #e7e1f6; }
+:root[data-theme="light"] .browser span { background: rgba(40, 24, 80, .2); }
+:root[data-theme="light"] .site-phone { border-color: #e7e1f6; box-shadow: 0 12px 28px rgba(60, 30, 120, .25); }
+:root[data-theme="light"] .site-shot { background: linear-gradient(160deg, rgba(168, 85, 247, .14), rgba(236, 72, 153, .06)); }
+:root[data-theme="light"] .nav-links { background: transparent; }
+@media (max-width: 860px) {
+  :root[data-theme="light"] .nav-links { background: var(--card); }
+}
+
+/* ---------- Páginas de projeto (site.css + demos.css) ---------- */
+:root[data-theme="light"] .nav:not(.scrolled) { background: var(--nav-bg); }
+:root[data-theme="light"] .case-head h1 { background: linear-gradient(90deg, var(--ink) 40%, #a855f7); -webkit-background-clip: text; background-clip: text; }
+:root[data-theme="light"] .btn-quiet { color: var(--ink); }
+:root[data-theme="light"] .kpi,
+:root[data-theme="light"] .pf-stage,
+:root[data-theme="light"] .os-badge,
+:root[data-theme="light"] .rp-emails li { background: rgba(40, 24, 80, .05); }
+:root[data-theme="light"] .rp-rm:hover { background: rgba(40, 24, 80, .08); }
+:root[data-theme="light"] .rp-switch input { background: rgba(40, 24, 80, .18); }
+:root[data-theme="light"] .rp-switch input:checked { background: var(--grad); }
+:root[data-theme="light"] .pf-mode,
+:root[data-theme="light"] .os-badge.is-q { color: #7e22ce; }
+:root[data-theme="light"] .pf-stage.is-ok { background: rgba(21, 128, 61, .1); }
+:root[data-theme="light"] .pf-stage.is-warn { background: rgba(180, 83, 9, .1); }
+:root[data-theme="light"] .tip { background: #1d1636; color: #fff; }
+:root[data-theme="light"] select option { background: #fff; color: #1d1636; }
+:root[data-theme="light"] .os-doc,
+:root[data-theme="light"] .qr-sheet-wrap,
+:root[data-theme="light"] .rp-mail-wrap { box-shadow: 0 0 0 1px var(--rule), 0 10px 28px rgba(60, 30, 120, .12); }
+:root[data-theme="light"] .next:hover { box-shadow: 0 14px 32px rgba(60, 30, 120, .12); }

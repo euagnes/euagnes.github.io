@@ -8,7 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css?v=4" />
+  <link rel="stylesheet" href="css/main.css?v=5" />
+  <link rel="stylesheet" href="css/light.css?v=1" />
+  <script src="js/theme.js?v=1"></script>
 </head>
 <body>
   <!-- Cursor customizado -->
@@ -18,14 +20,14 @@
   <!-- ============ NAVBAR ============ -->
   <nav class="nav">
     <a href="#hero" class="logo">&lt;<b>AS</b>/&gt;</a>
-    <ul class="nav-links">
+    <div class="nav-right"><ul class="nav-links">
       <li><a href="#about">Sobre</a></li>
       <li><a href="#experience">Experiência</a></li>
       <li><a href="#projects">Projetos</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Formação</a></li>
       <li><a href="#contact">Contato</a></li>
-    </ul>
+    </ul><button type="button" class="theme-toggle" data-theme-toggle aria-label="Trocar tema">☀</button></div>
     <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">☰</button>
   </nav>
 
@@ -390,6 +392,6 @@
 
   <button class="to-top" aria-label="Voltar ao topo">↑</button>
 
-  <script src="js/main.js?v=1"></script>
+  <script src="js/main.js?v=2"></script>
 </body>
 </html>

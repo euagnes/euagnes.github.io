@@ -98,20 +98,21 @@ function resize() {
 function draw() {
   const W = canvas.offsetWidth, H = canvas.offsetHeight;
   ctx.clearRect(0, 0, W, H);
+  const claro = document.documentElement.dataset.theme === 'light';
   pts.forEach((p) => {
     p.x += p.vx; p.y += p.vy;
     if (p.x < 0 || p.x > W) p.vx *= -1;
     if (p.y < 0 || p.y > H) p.vy *= -1;
     ctx.beginPath();
     ctx.arc(p.x, p.y, 1.8, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(216, 180, 254, .7)';
+    ctx.fillStyle = claro ? 'rgba(147, 51, 234, .55)' : 'rgba(216, 180, 254, .7)';
     ctx.fill();
   });
   for (let a = 0; a < pts.length; a++) {
     for (let b = a + 1; b < pts.length; b++) {
       const d = Math.hypot(pts[a].x - pts[b].x, pts[a].y - pts[b].y);
       if (d < 120) {
-        ctx.strokeStyle = `rgba(168, 85, 247, ${0.25 * (1 - d / 120)})`;
+        ctx.strokeStyle = `rgba(168, 85, 247, ${(claro ? 0.35 : 0.25) * (1 - d / 120)})`;
         ctx.beginPath(); ctx.moveTo(pts[a].x, pts[a].y); ctx.lineTo(pts[b].x, pts[b].y); ctx.stroke();
       }
     }
