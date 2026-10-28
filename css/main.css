@@ -88,7 +88,7 @@ body.has-cursor .cursor-dot, body.has-cursor .cursor-ring { opacity: 1; }
 .about-photo { aspect-ratio: 1; border-radius: var(--radius); padding: 3px; background: var(--grad); transform: rotate(-3deg); transition: transform .3s; }
 .about-photo:hover { transform: rotate(0); }
 .about-photo .inner { width: 100%; height: 100%; border-radius: calc(var(--radius) - 3px); background: var(--card); display: grid; place-items: center; text-align: center; color: var(--muted); font-family: "Fira Code", monospace; overflow: hidden; }
-.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.about-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .about-text .section-title { margin-bottom: 22px; }
 .about-text p { color: var(--muted); margin-bottom: 16px; }
 .about-text strong { color: var(--text); }
