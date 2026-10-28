@@ -182,3 +182,6 @@ h3 { font-size: 16px; font-weight: 700; }
 }
 
 .back { font-size: 14px; color: var(--muted); }
+
+.other { font-size: 14.5px; color: var(--muted); padding-top: 4px; }
+.other strong { color: var(--ink); font-weight: 500; }
