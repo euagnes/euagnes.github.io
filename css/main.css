@@ -181,3 +181,27 @@ footer { padding: 30px 0; text-align: center; color: var(--muted); font-size: 14
   .tl-item { padding: 22px 20px; }
   .tl-item::before { left: -25px; }
 }
+
+/* Sites para clientes (Agência Explorer) */
+.sites-head { margin-top: 90px; }
+.sites-title { font-size: clamp(26px, 3.4vw, 34px); font-weight: 700; line-height: 1.2; margin-bottom: 30px; }
+.sites-title span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sites-head .section-sub { margin: -14px 0 32px; }
+.sites-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+.site { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .25s, border-color .25s, box-shadow .25s; }
+.site:hover { transform: translateY(-6px); border-color: rgba(236, 72, 153, .5); box-shadow: 0 18px 40px rgba(0, 0, 0, .35); }
+.site-shot { position: relative; padding: 20px 20px 0; background: linear-gradient(160deg, rgba(168, 85, 247, .18), rgba(236, 72, 153, .08)); }
+.browser { display: flex; align-items: center; gap: 6px; background: #2a2545; border-radius: 10px 10px 0 0; padding: 9px 12px; }
+.browser span { width: 9px; height: 9px; border-radius: 50%; background: rgba(255, 255, 255, .25); }
+.browser em { font-style: normal; font-family: "Fira Code", monospace; font-size: 11px; color: var(--muted); margin-left: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.site-shot > img:not(.site-phone) { display: block; width: 100%; aspect-ratio: 1200 / 692; object-fit: cover; object-position: top; }
+.site-phone { position: absolute; right: 26px; bottom: -18px; width: 22%; aspect-ratio: 300 / 515; object-fit: cover; object-position: top; border-radius: 12px; border: 4px solid #2a2545; box-shadow: 0 12px 28px rgba(0, 0, 0, .5); transition: transform .3s; }
+.site:hover .site-phone { transform: translateY(-8px); }
+.site-body { padding: 34px 28px 28px; display: flex; flex-direction: column; flex: 1; }
+.site-body h4 { font-size: 21px; }
+.site-seg { font-family: "Fira Code", monospace; font-size: 12px; color: var(--pink); margin-bottom: 10px; }
+.site-body > p:not(.site-seg) { color: var(--muted); font-size: 15px; flex: 1; }
+.site-off { font-size: 14px; color: var(--muted); }
+@media (max-width: 860px) {
+  .sites-grid { grid-template-columns: 1fr; }
+}
