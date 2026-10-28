@@ -8,14 +8,27 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/main.css?v=8" />
+  <link rel="stylesheet" href="css/main.css?v=9" />
   <link rel="stylesheet" href="css/light.css?v=1" />
   <script src="js/theme.js?v=1"></script>
 </head>
 <body>
   <!-- Cursor customizado -->
   <div class="cursor-dot"></div>
-  <div class="cursor-ring"></div>
+  <div class="cursor-ring" aria-hidden="true">
+    <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- cabeça com orelhas -->
+      <path d="M9 20 L7 6 L18 12 Q24 10 30 12 L41 6 L39 20 Q42 30 36 38 Q24 46 12 38 Q6 30 9 20 Z" />
+      <!-- olhos -->
+      <circle cx="18" cy="25" r="1.6" fill="currentColor" stroke="none" />
+      <circle cx="30" cy="25" r="1.6" fill="currentColor" stroke="none" />
+      <!-- nariz e boca -->
+      <path d="M22.5 31 L25.5 31 L24 33 Z" fill="currentColor" stroke="none" />
+      <path d="M24 33 Q24 35.5 21 35.5 M24 33 Q24 35.5 27 35.5" />
+      <!-- bigodes -->
+      <path d="M4 29 L13 30 M4 34 L13 32.5 M44 29 L35 30 M44 34 L35 32.5" />
+    </svg>
+  </div>
 
   <!-- ============ NAVBAR ============ -->
   <nav class="nav">
