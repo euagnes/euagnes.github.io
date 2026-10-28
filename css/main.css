@@ -206,10 +206,3 @@ footer { padding: 30px 0; text-align: center; color: var(--muted); font-size: 14
   .sites-grid { grid-template-columns: 1fr; }
 }
 .tagline-meta { display: block; margin-top: 14px; font-size: 15px; color: var(--text); opacity: .85; }
-
-/* Grupo de skill em destaque (Banco de dados) */
-.skill-featured { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; margin-bottom: 8px; }
-.skill-featured::before { content: ""; position: absolute; left: 0; top: 18px; bottom: 18px; width: 3px; border-radius: 3px; background: var(--grad); }
-.skill-featured h3 { font-family: "Poppins", sans-serif; font-size: 22px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
-.skill-note { color: var(--muted); max-width: 70ch; margin-bottom: 16px; font-size: 15px; }
-.skill-featured .tag { border-color: rgba(168, 85, 247, .4); }
